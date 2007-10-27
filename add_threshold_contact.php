@@ -13,10 +13,9 @@
   Usage:
   1. Login to Cacti, User Management and add an email address for the admin
      user (or whichever user(s) you want to use as contacts for threshold
-     alerts.
+     alerts).
   2. Place this script in your cacti/cli/ directory.
-  3. Run the script like this:
-      php add_threshold_contact.php <user1> [<user2> ...]
+  3. Run the script without any options to view the usage help.
 
 
   Joel Knight
@@ -63,7 +62,7 @@ if (count($_SERVER["argv"]) < 2)
 
 if (gettype($options["u"]) != "string") {
 	printf("Please specify exactly one username using the -u switch.\n\n");
-	usage(1);
+	usage();
 }
 
 $sql = "SELECT ua.id, ua.username, contacts.data," .
