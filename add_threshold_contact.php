@@ -44,14 +44,14 @@ function usage() {
 Usage: $me [-r] [-d <descr>] [-h <hostname>] -u <username>
 
 -d <descr>    Only add <username> as a contact if the threshold
-	      belongs to a device with description <descr>.
-	      Wildcards can be used by using '%'.
+              belongs to a device with description <descr>.
+              Wildcards can be used by using '%'.
 -h <hostname> Only add <username> as a contact if the threshold
-	      belongs to a device with hostname <hostname>.
-	      Wildcards can be used by using '%'.
+              belongs to a device with hostname <hostname>.
+              Wildcards can be used by using '%'.
 -u <username> The Cacti user to add as a contact. Unless -d
-	      and/or -h are specified, the user will be added
-	      to all thresholds.
+              and/or -h are specified, the user will be added
+              to all thresholds.
 -r            Removes the contact from the specified thresholds
               instead of adding.
 
@@ -108,7 +108,7 @@ foreach ($thresholds as $th) {
 		"WHERE thold_id = $th[thold_id] " .
 		"AND contact_id = $user[contact_id]";
 	db_execute($sql);
-	if (!isset($options["r"]) ) {
+	if (!isset($options["r"])) {
 	    $sql = "INSERT INTO plugin_thold_threshold_contact " .
 		    "VALUES ($th[thold_id], $user[contact_id])";
 	    db_execute($sql);
