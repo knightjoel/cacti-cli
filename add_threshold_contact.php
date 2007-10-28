@@ -62,7 +62,7 @@ END;
 if (count($_SERVER["argv"]) < 2)
 	usage();
 
-if (gettype($options["u"]) != "string") {
+if (!isset($options["u"]) || gettype($options["u"]) != "string") {
 	printf("Please specify exactly one username using the -u switch.\n\n");
 	usage();
 }
