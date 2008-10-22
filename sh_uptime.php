@@ -18,7 +18,7 @@ if (!isset($_SERVER["argv"][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($
 }
 
 function usage() {
-	print "Usage: " . $_SERVER['SCRIPT_NAME'] . " [-m <seconds>]\n";
+	print "Usage: " . $_SERVER['SCRIPT_NAME'] . " [-m <seconds>] [-n hostname]\n";
 	exit;
 }
 
@@ -29,7 +29,7 @@ include(dirname(__FILE__) . "/../include/global.php");
 include_once($config["base_path"] . "/lib/auth.php");
 include_once($config["base_path"] . "/lib/snmp.php");
 
-$opt = getopt("hm:");
+$opt = getopt("hm:n:");
 
 if (array_key_exists("h", $opt))
 	usage();
@@ -49,8 +49,14 @@ $sql = "SELECT host.id,
 	host.snmp_context,
 	host.snmp_port,
 	host.snmp_timeout
-	FROM host
-	ORDER BY host.hostname";
+	FROM host";
+
+if (array_key_exists("n", $opt)) {
+	$hostname = $opt["n"];
+	$sql .= " WHERE host.hostname LIKE '$hostname'";
+}
+
+$sql .=	" ORDER BY host.hostname";
 
 $hosts = db_fetch_assoc($sql);
 
